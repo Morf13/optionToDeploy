@@ -1,8 +1,7 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-Check to add  pupils
-
+<h5>Check to add  pupils</h5>
 <form action="#" method="post">
     <#list users?ifExists as pupil>
     <div>

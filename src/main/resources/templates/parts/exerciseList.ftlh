@@ -1,6 +1,5 @@
 <#include "security.ftlh">
 <#import "pager.ftlh" as p>
-<@p.pager url page />
 <div class="card-columns" id = "exercises-list">
 
     <#list page.content as exercise>

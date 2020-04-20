@@ -8,7 +8,7 @@
   <div class="container">
   <div class="row">
     <div class="col-sm">
-      My pupils
+      <h5>My pupils</h5>
        <#list pupils?ifExists as pupil>
     <div>
         <label><input type="checkbox" name="pupil${pupil.id?ifExists}" >${pupil.username?ifExists}</label>
@@ -16,7 +16,7 @@
     </#list>
     </div>
     <div class="col-sm">
-      My exercises
+      <h5>My exercises</h5>
        <#list exercises?ifExists as exercise>
     <div>
         <label><input type="checkbox" name="exercise${exercise.id?ifExists}" >${exercise.title?ifExists}</label>
