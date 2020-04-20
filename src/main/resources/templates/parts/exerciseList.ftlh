@@ -11,7 +11,7 @@
             <div class="card-footer text-muted">
                 <a href="/user-exercises/${exercise.author.id}">${exercise.authorName}</a>
                 <#if exercise.author.id == currentUserId>
-                    <a class="btn btn-primary" href="/user-exercises/${exercise.author.id}?exercise=${exercise.id}">
+                    <a class="btn btn-primary" href="/editExerciseText/${exercise.id}">
                         Edit
                     </a>
                 </#if>

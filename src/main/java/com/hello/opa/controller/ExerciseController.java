@@ -109,6 +109,22 @@ public class ExerciseController {
 //		model.addAttribute("check", form);
 //		return "check";
 	}
+	
+	@GetMapping("/editExerciseText/{exercise}")
+	public String editExText(Model model, @AuthenticationPrincipal User user,@PathVariable Exercise exercise) { 
+		model.addAttribute("exercise",exercise );
+
+		return "editExerciseText";
+	}
+	
+	@PostMapping("/editExerciseText/{exercise}")
+	public String editSaveExText(Model model, @AuthenticationPrincipal User user,@PathVariable Exercise exercise, @RequestParam Map<String, String> form) { 
+		model.addAttribute("exercise",exercise );
+		exercise.setTitle(form.get("title"));
+		exercise.setTask(form.get("task"));
+		exerciseRepository.save(exercise);
+		return "editExerciseText";
+	}
 
 	@PostMapping("/addExercise")
 	public String add(@AuthenticationPrincipal User user, @Valid Exercise exercise, BindingResult bindingResult,
