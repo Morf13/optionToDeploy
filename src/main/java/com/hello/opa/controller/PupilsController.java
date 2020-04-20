@@ -56,11 +56,12 @@ public class PupilsController {
 		 User teacher = userRepo.findById(Long.parseLong(form.get("teacher")));
 		 HashSet<User> teachers = new HashSet<User>();
 		 teachers.add(teacher);
+		 HashSet<User> pupils = new HashSet<User>();
 		 	for(String k: form.keySet()) {
 		 		
 		 		if(!k.equals("_csrf")&&!k.equals("teacher")) {
 		 			User pupil = userRepo.findById(Long.parseLong(k));
-		 			 HashSet<User> pupils = new HashSet<User>();
+		 			 
 		 			 pupils.add(pupil);
 		 			
 		 			teacher.setPupils(pupils);
