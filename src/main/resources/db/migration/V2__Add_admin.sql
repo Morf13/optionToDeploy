@@ -17,7 +17,7 @@ insert into user_role (user_id, roles)
     values (3, 'USER');
     
 insert into usr (id, username, password, active, email)
-    values (3, 'Sonya Ryzhakova', '123', true, 'n@nnn.ru');
+    values (4, 'Sonya Ryzhakova', '123', true, 'n@nnnn.ru');
 
 insert into user_role (user_id, roles)
-    values (3, 'USER');
+    values (4, 'USER');
