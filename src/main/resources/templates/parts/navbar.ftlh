@@ -51,6 +51,6 @@
       </#if>
       </ul>
       <div class="navbar-text mr-3">${name}</div>
-      <div><@l.logout /></div>
+      <#if user??><div><@l.logout /></div></#if>
       </div>
       </nav>

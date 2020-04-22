@@ -8,6 +8,9 @@
 <form method="POST">
 <h3>${exerciseTitle}</h3>
 <br>
+<h6>${exerciseExpl}</h6>
+<br>
+
  <#list exercise as k>
  <p>${numberSentence}. ${k.task}
  <#assign numberAnswer = 1>

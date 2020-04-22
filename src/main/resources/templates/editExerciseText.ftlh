@@ -12,10 +12,32 @@
                     </div>
                 </#if>
             </div>
-      
             <div class="form-group">
-               <p><textarea rows="10" cols="100" name="task" id = "task"><#if exercise??>${exercise.task}</#if></textarea></p>
-                
+                <input type="text" class="form-control ${(explanationError??)?string('is-invalid', '')}"
+                       value="<#if exercise??>${exercise.explanation}</#if>" name="explanation" placeholder="Explanation" />
+                <#if explanationError??>
+                    <div class="invalid-feedback">
+                        ${explanationError}
+                    </div>
+                </#if>
+            </div>
+             <div class="form-group">
+                <input type="text" class="form-control ${(topicError??)?string('is-invalid', '')}"
+                       value="<#if exercise??>${exercise.topic}</#if>" name="topic" placeholder="Enter topic" />
+                <#if topicError??>
+                    <div class="invalid-feedback">
+                        ${topicError}
+                    </div>
+                </#if>
+            </div>
+           
+            <div class="form-group">
+               <textarea  rows="10" cols="100" name="task" id = "task">${exercise.task}</textarea>
+                <#if taskError??>
+                    <div class="invalid-feedback">
+                        ${taskError}
+                    </div>
+                </#if>
             </div>
            
             
@@ -27,3 +49,4 @@
   </div>
   
 </@c.page>
+

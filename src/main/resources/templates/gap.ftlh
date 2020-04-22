@@ -8,6 +8,8 @@
 <form method="POST">
 <h3>${exerciseTitle}</h3>
 <br>
+<h6>${exerciseExpl}</h6>
+<br>
  <#list exercise as k>
  <p>${numberSentence}. ${k.taskLeft} <input type="text"  name="${numberSentence}" placeholder="your answer" /> ${k.taskRight}
   <br>

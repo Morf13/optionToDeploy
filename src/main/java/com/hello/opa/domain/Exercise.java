@@ -30,8 +30,15 @@ public class Exercise {
 	@Length(max = 255, message = "Title too long")
 
 	private String title;
-	//private String fileName;
+	
+	@NotBlank(message = "Please add the task")
 	private String task;
+	
+	@NotBlank(message = "Please add the topic")
+	private String topic;
+	
+	@NotBlank(message = "Please add the explanation")
+	private String explanation;
 	
 	@NotBlank(message = "Please choose Exercise type")
 	private String typeOfTask;
@@ -98,5 +105,39 @@ public class Exercise {
 	public void setType(String type) {
 		this.typeOfTask = type;
 	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
+	public String getExplanation() {
+		return explanation;
+	}
+
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
+
+	public String getTypeOfTask() {
+		return typeOfTask;
+	}
+
+	public void setTypeOfTask(String typeOfTask) {
+		this.typeOfTask = typeOfTask;
+	}
+
+	public Set<User> getPupils() {
+		return pupils;
+	}
+
+	public void setPupils(Set<User> pupils) {
+		this.pupils = pupils;
+	}
+	
+	
 	
 }

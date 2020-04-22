@@ -69,8 +69,7 @@ public class PupilsController {
 		 		}
 		 	}
 		
-			return "addPupil";
-			
+		 	return "redirect:/teacher-pupils/" + user.getId();
 		}
 	 
 	 	@GetMapping("/teacher-pupils/{user}")

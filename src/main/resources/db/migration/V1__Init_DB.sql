@@ -1,5 +1,5 @@
 create sequence hibernate_sequence start 1 increment 1;
-create table exercises (id int8 not null, task varchar(3000), title varchar(255) not null, user_id int8, primary key (id), type_of_task varchar(255) not null);
+create table exercises (id int8 not null, task varchar(3000),explanation varchar(1000), topic varchar(250), title varchar(255) not null, user_id int8, primary key (id), type_of_task varchar(255) not null);
 create table pupils (id int8 not null, teacher_id int8, primary key (id));
 create table pupil_exercises (user_id int8 not null, exercise_id int8 not null);
 create table pupil_teacher (teacher_id int8 not null, pupil_id int8 not null);
