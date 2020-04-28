@@ -175,7 +175,7 @@ public class ExerciseController {
 	}
 
 	@PostMapping("/exercise/gap/{exercise}")
-	public String checkGap(@PathVariable Exercise exercise, Model model, @RequestParam Map<String, String> form) {
+	public String checkGap(@AuthenticationPrincipal User currentUser,@PathVariable Exercise exercise, Model model, @RequestParam Map<String, String> form) {
 		ArrayList<Gap> data = exerciseService.getGapText(exercise.getId());
 		model.addAttribute("exercise", data);
 		model.addAttribute("exerciseTitle", exercise.getTitle());
@@ -183,6 +183,13 @@ public class ExerciseController {
 		model.addAttribute("size", data.size());
 		double result = exerciseService.checkGap(form, data);
 		model.addAttribute("result", result);
+		if (!currentUser.isTeacher() && !currentUser.isAdmin()) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String now = LocalDateTime.now().format(formatter);
+			Result results = new Result(currentUser.getId(), exercise.getId(), (int) result, now, exercise.getTitle(),
+					currentUser.getUsername());
+			resultRepo.save(results);
+		}
 		return "gap";
 	}
 
