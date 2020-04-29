@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Stack;
 
 import javax.validation.Valid;
 
@@ -29,6 +30,7 @@ import com.hello.opa.repos.ExerciseRepository;
 import com.hello.opa.repos.ResultRepository;
 import com.hello.opa.service.ExerciseService;
 import com.hello.opa.service.Gap;
+import com.hello.opa.service.MailSender;
 import com.hello.opa.service.MultipleChoice;
 
 @Controller
@@ -39,6 +41,9 @@ public class ExerciseController {
 
 	@Autowired
 	private ResultRepository resultRepo;
+	
+	@Autowired
+	private MailSender mailSender;
 
 	@Autowired
 	ExerciseService exerciseService;
@@ -150,13 +155,16 @@ public class ExerciseController {
 		model.addAttribute("exerciseTitle", exercise.getTitle());
 		model.addAttribute("exerciseExpl", exercise.getExplanation());
 		model.addAttribute("size", data.size());
-		double result = exerciseService.checkMultipleChoice(form, data);
+		Stack<String> res = exerciseService.checkMultipleChoice(form, data);
+		double result =  Double.parseDouble(res.pop());
 		model.addAttribute("result", result);
+		
 		if (!currentUser.isTeacher() && !currentUser.isAdmin()) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			String now = LocalDateTime.now().format(formatter);
 			Result results = new Result(currentUser.getId(), exercise.getId(), (int) result, now, exercise.getTitle(),
 					currentUser.getUsername());
+			mailSender.send("marininfor@yandex.ru", "results from "+ currentUser.getUsername() + " " + exercise.getTitle(), res.toString());
 			resultRepo.save(results);
 		}
 		return "multiple";
@@ -181,13 +189,16 @@ public class ExerciseController {
 		model.addAttribute("exerciseTitle", exercise.getTitle());
 		model.addAttribute("exerciseExpl", exercise.getExplanation());
 		model.addAttribute("size", data.size());
-		double result = exerciseService.checkGap(form, data);
+		Stack<String> res =  exerciseService.checkGap(form, data);
+		double result = Double.parseDouble(res.pop());
 		model.addAttribute("result", result);
+		
 		if (!currentUser.isTeacher() && !currentUser.isAdmin()) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 			String now = LocalDateTime.now().format(formatter);
 			Result results = new Result(currentUser.getId(), exercise.getId(), (int) result, now, exercise.getTitle(),
 					currentUser.getUsername());
+			mailSender.send("marininfor@yandex.ru", "results from "+ currentUser.getUsername() + " " + exercise.getTitle(), res.toString());
 			resultRepo.save(results);
 		}
 		return "gap";

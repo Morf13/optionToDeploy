@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Stack;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
@@ -75,12 +76,13 @@ public class ExerciseService {
 
 	}
 
-	public double checkMultipleChoice(Map<String, String> formAnswers, ArrayList<MultipleChoice> data) {
+	public Stack<String> checkMultipleChoice(Map<String, String> formAnswers, ArrayList<MultipleChoice> data) {
 		Map<String, ArrayList<String>> studentAnswers = new HashMap<>();
 		double totalScore = 0;
+		Stack<String> mistakes = new Stack<String>();
 		for (int i = 1; i <= data.size(); i++)
 			studentAnswers.put(i + "", new ArrayList<String>());
-		
+
 		formAnswers.forEach((k, v) -> {
 			if (!k.equals("_csrf"))
 				studentAnswers.get(k.substring(0, k.indexOf("/"))).add(v);
@@ -89,10 +91,13 @@ public class ExerciseService {
 		for (int i = 0; i < data.size(); i++) {
 
 			ArrayList<String> answers = studentAnswers.get(i + 1 + "");
-			if (answers != null)
+			if (answers != null) {
 				totalScore += data.get(i).check(answers);
+				mistakes.push(data.get(i).getTask() + " ANSWERS -> " + studentAnswers.get(i + 1 + "").toString());
+			}
 		}
-		return totalScore / data.size();
+		mistakes.push(totalScore / data.size() + "");
+		return mistakes;
 
 	}
 
@@ -122,13 +127,19 @@ public class ExerciseService {
 
 	}
 
-	public double checkGap(Map<String, String> formAnswers, ArrayList<Gap> data) {
+	public Stack<String> checkGap(Map<String, String> formAnswers, ArrayList<Gap> data) {
 		double totalScore = 0;
+		Stack<String> mistakes = new Stack<String>();
 		for (int i = 0; i < data.size(); i++) {
 			if (data.get(i).check(formAnswers.get(i + 1 + "")))
 				totalScore += 100 / data.size();
+			else {
+				mistakes.add(data.get(i).getTaskLeft() + " ... " + data.get(i).getTaskRight() + " MISTAKE -> "
+						+ formAnswers.get(i + 1 + ""));
+			}
 		}
-		return totalScore;
+		mistakes.push(totalScore + "");
+		return mistakes;
 	}
 
 }
