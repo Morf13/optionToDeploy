@@ -35,7 +35,7 @@ public class Gap {
 	}
 	
 	public boolean check(String pupilAnswer) {
-		if(this.answer.equals(pupilAnswer)) return true;
+		if(this.answer.equals(pupilAnswer.trim())) return true;
 		return false;
 		
 	}
