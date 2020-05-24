@@ -16,6 +16,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/user">User List</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/user/add">Add user</a>
+      </li>
       </#if>
       <#if isTeacher>
       <li class="nav-item">

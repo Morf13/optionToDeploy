@@ -13,6 +13,9 @@
                     <a class="btn btn-primary" href="/editExerciseText/${exercise.id}">
                         Edit
                     </a>
+                    <a class="btn btn-primary" href="/deleteExercise/${exercise.id}">
+                        Delete
+                    </a>
                 </#if>
             
             </div>

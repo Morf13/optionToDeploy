@@ -90,6 +90,13 @@ public class ExerciseController {
 
 		return "redirect:/user-exercises/" + user.getId();
 	}
+	
+	@GetMapping("/deleteExercise/{exercise}")
+	public String deleteExercise(Model model, @AuthenticationPrincipal User user, @Valid Exercise exercise) {
+		exerciseRepository.delete(exercise);
+
+		return "redirect:/user-exercises/" + user.getId();
+	}
 
 	@GetMapping("/editExerciseText/{exercise}")
 	public String editExText(Model model, @AuthenticationPrincipal User user, @Valid Exercise exercise) {

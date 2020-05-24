@@ -46,7 +46,7 @@ public class UserService implements UserDetailsService {
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         user.setActivationCode(UUID.randomUUID().toString());
-        user.setPassword(passwordEncod.encode(user.getPassword()));
+        user.setPassword(user.getPassword());
 
         userRepo.save(user);
 
