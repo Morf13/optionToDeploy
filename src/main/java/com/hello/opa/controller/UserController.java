@@ -73,6 +73,12 @@ public class UserController {
         return "addUser";
     }
 
+    @GetMapping("/delete/{user}")
+    public String deleteUser(@PathVariable User user, Model model) {
+    	userRepo.deleteById(user.getId());
+
+        return "redirect:/";
+    }
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);

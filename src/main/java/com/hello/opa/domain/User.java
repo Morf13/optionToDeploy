@@ -41,7 +41,7 @@ public class User implements UserDetails {
                        inverseJoinColumns = { @JoinColumn(name = "pupil_id") })
     private Set<User> pupils;
 	
-	@ManyToMany(targetEntity = User.class, cascade = {CascadeType.ALL})
+	@ManyToMany(targetEntity = User.class, cascade = {CascadeType.DETACH})
     @JoinTable(name = "teacher_pupil", joinColumns = { @JoinColumn(name = "pupil_id") }, 
                        inverseJoinColumns = { @JoinColumn(name = "teacher_id") })
     private Set<User> teachers;
