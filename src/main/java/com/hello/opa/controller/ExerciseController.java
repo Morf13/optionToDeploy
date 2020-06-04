@@ -171,7 +171,11 @@ public class ExerciseController {
 			String now = LocalDateTime.now().format(formatter);
 			Result results = new Result(currentUser.getId(), exercise.getId(), (int) result, now, exercise.getTitle(),
 					currentUser.getUsername());
-			mailSender.send("marininfor@yandex.ru", "results from "+ currentUser.getUsername() + " " + exercise.getTitle(), res.toString());
+			try{mailSender.send("marininfor@yandex.ru", "results from "+ currentUser.getUsername() + " " + exercise.getTitle(), res.toString());}
+			catch(Exception e) {
+				resultRepo.save(results);
+				return "multiple";
+				}
 			resultRepo.save(results);
 		}
 		return "multiple";
@@ -205,7 +209,11 @@ public class ExerciseController {
 			String now = LocalDateTime.now().format(formatter);
 			Result results = new Result(currentUser.getId(), exercise.getId(), (int) result, now, exercise.getTitle(),
 					currentUser.getUsername());
-			mailSender.send("marininfor@yandex.ru", "results from "+ currentUser.getUsername() + " " + exercise.getTitle(), res.toString());
+			try{mailSender.send("marininfor@yandex.ru", "results from "+ currentUser.getUsername() + " " + exercise.getTitle(), res.toString());}
+			catch(Exception e) {
+				resultRepo.save(results);
+				return "gap";
+			}
 			resultRepo.save(results);
 		}
 		return "gap";
