@@ -8,7 +8,7 @@ public class  MultipleChoice{
 	private int id;
 	private String task;
 	private ArrayList<String> answers = new ArrayList<String>();
-	private ArrayList<String> rightAnswers = new ArrayList<String>();;
+	private ArrayList<String> rightAnswers = new ArrayList<String>();
 
 	public MultipleChoice(Integer id, String task) {
 		this.task = task;

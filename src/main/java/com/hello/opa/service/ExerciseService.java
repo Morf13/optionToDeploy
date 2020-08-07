@@ -1,40 +1,19 @@
 package com.hello.opa.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
 import com.hello.opa.domain.Exercise;
 import com.hello.opa.domain.User;
 //import com.hello.opa.domain.dto.ExerciseDto;
 import com.hello.opa.repos.ExerciseRepository;
-
-import antlr.collections.List;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Stack;
-
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFColor;
-import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 
 @Service
 public class ExerciseService {
@@ -48,7 +27,6 @@ public class ExerciseService {
 	}
 
 	public Page<Exercise> exerciseListForUser(Pageable pageable, User currentUser, User author) {
-		// TODO Auto-generated method stub
 		return exerciseRepository.findByUser(pageable, author);
 	}
 
@@ -101,17 +79,7 @@ public class ExerciseService {
 
 	}
 
-	public ArrayList<Gap> getGap(Map<Integer, ArrayList<MyCell>> data) {
-		ArrayList<Gap> exerciseForView = new ArrayList<>();
-
-		for (int k = 0; k < data.size(); k++) {
-			Gap gap = new Gap(k + 1, data.get(k).get(0).getContent(), data.get(k).get(1).getContent(),
-					data.get(k).get(2).getContent());
-
-			exerciseForView.add(gap);
-		}
-		return exerciseForView;
-	}
+	
 
 	public ArrayList<Gap> getGapText(Long id) {
 		ArrayList<Gap> exerciseForView = new ArrayList<>();

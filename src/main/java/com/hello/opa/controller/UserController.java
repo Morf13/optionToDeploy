@@ -3,7 +3,6 @@ package com.hello.opa.controller;
 
 import com.hello.opa.domain.Role;
 import com.hello.opa.domain.User;
-import com.hello.opa.domain.dto.CaptchaResponseDto;
 import com.hello.opa.repos.UserRepository;
 import com.hello.opa.service.UserService;
 
@@ -16,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
